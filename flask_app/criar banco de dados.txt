@@ -1,0 +1,10 @@
+pip install flask flask-mysql mysql-connector-python
+
+USE aula;
+
+CREATE TABLE usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    status ENUM('ativo', 'inativo') DEFAULT 'ativo'
+);
