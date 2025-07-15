@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Site de Login </title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f1f5f9;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 900px;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .form-side {
+      flex: 1;
+      padding: 40px;
+      background-color: #0f172a;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .form-side h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .form-side h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    button.green {
+      background-color: #22c55e;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 8px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+      background-color: white;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-side">
+
+      <!-- Login -->
+      <div id="login" class="page active">
+        <h1>Bem-vindo!</h1>
+        <h2>Faça login para continuar</h2>
+        <form id="loginForm">
+          <input type="text" placeholder="Usuário ou e-mail" required />
+          <div>
+          <input type="password" placeholder="Senha" id="senha" required />
+          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)">Mostrar</button>
+          </div>
+          <button type="submit">Entrar</button>
+          </div>
+          <p><a onclick="trocarPagina('esqueci')">Esqueceu a senha?</a></p>
+          <p>Não tem conta? <a onclick="trocarPagina('cadastro')">Cadastre-se</a></p>
+        </form>
+      </div>
+
+      <!-- Cadastro -->
+      <div id="cadastro" class="page">
+        <h1>Cadastro</h1>
+        <h2>Crie sua conta</h2>
+        <form id="cadastroForm">
+          <input type="text" placeholder="Nome completo" required />
+          <input type="text" placeholder="Nome de usuário" required />
+          <input type="email" placeholder="E-mail" required />
+          <div class="password-container">
+          <input type="password" placeholder="Senha" id="senha" required />
+          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)">Mostrar</button>
+        </div>
+
+          <div class="password-container">
+          <input type="password" placeholder="Confirmar senha" id="confirmarSenha" required />
+          <button type="button" class="toggle-password" onclick="toggleSenha('confirmarSenha', this)">Mostrar</button>
+        </div>
+          <select required>
+            <option value="" disabled selected hidden>Selecione sua série</option>
+            <option value="1EM">1º ano do Ensino Médio</option>
+            <option value="2EM">2º ano do Ensino Médio</option>
+            <option value="3EM">3º ano do Ensino Médio</option>
+          </select>
+          <button type="submit" class="green">Cadastrar</button>
+          <p>Já tem conta? <a onclick="trocarPagina('login')">Entrar</a></p>
+        </form>
+        
+      </div>
+
+      <!-- Esqueci Senha -->
+      <div id="esqueci" class="page">
+        <h1>Recuperar senha</h1>
+        <h2>Digite seu e-mail ou nome de usuário</h2>
+        <form id="esqueciForm">
+          <input type="email" placeholder="E-mail" required />
+          <input type="text" placeholder="Nome de usuário" required />
+          <button type="submit">Continuar</button>
+          <p><a onclick="trocarPagina('login')">Voltar ao login</a></p>
+        </form>
+      </div>
+
+      <!-- Redefinir Senha -->
+      <div id="redefinir" class="page">
+        <h1>Nova senha</h1>
+        <h2>Digite sua nova senha</h2>
+        <form id="redefinirForm">
+          <input type="password" placeholder="Confirmar nova senha" required />
+        <div>
+          <input type="password" placeholder="Confirmar nova senha" required />
+          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)">Mostrar</button>
+        </div>
+          <div class="password-container">
+          <input type="password" placeholder="nova senha" required />
+          <button type="button" class="toggle-password" onclick="toggleSenha('senha', this)">Mostrar</button>
+        </div>
+          <button type="submit">Salvar</button>
+          <p><a onclick="trocarPagina('login')">Voltar ao login</a></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function trocarPagina(id) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    document.getElementById("cadastroForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const senha = this.querySelector("input[placeholder='Senha']").value;
+      const confirmar = this.querySelector("input[placeholder='Confirmar senha']").value;
+      if (senha !== confirmar) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+      alert("Cadastro realizado com sucesso!");
+      trocarPagina('login');
+    });
+
+    document.getElementById("loginForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Login realizado!");
+    });
+
+    document.getElementById("esqueciForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      trocarPagina('redefinir');
+    });
+
+    document.getElementById("redefinirForm")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const senha = this.querySelector("input[placeholder='Nova senha']").value;
+      const confirmar = this.querySelector("input[placeholder='Confirmar nova senha']").value;
+      if (senha !== confirmar) {
+        alert("As senhas não coincidem!");
+        return;
+      }
+      alert("Senha redefinida com sucesso!");
+      trocarPagina('login');
+    });
+  
+  function toggleSenha(idCampo, btn) {
+      const input = document.getElementById(idCampo);
+      const tipo = input.getAttribute("type") === "password" ? "text" : "password";
+      input.setAttribute("type", tipo);
+
+      // Alternar o emoji do botão (opcional)
+      btn.textContent = tipo === "password" ? "Mostrar" : "Esconder";
+    }
+  </script>
+</body>
+</html>
